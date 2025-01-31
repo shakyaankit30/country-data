@@ -1,0 +1,32 @@
+<div class="form-group col-12">
+    <label for="selectionCountry"><b>Select Country</b></label>
+    <select (change)="onCountrySelect($event)" class="form-select" id="selectionCountry">
+        <option value="" selected disabled>Select Country</option>
+        <option *ngFor="let country of countryList" [value]="country.cca2"
+        [selected]="country.cca2 === defaultCountryCode"
+        >
+          {{ country.name.common }}
+        </option>
+    </select>
+   
+
+    <div *ngIf="selectedCountry">
+        <h1 class="text-bold text-center mt-5">{{ selectedCountry.name.common }}</h1>
+
+        <div class="d-flex justify-content-center m-5">
+            <img [src]="selectedCountry.flags.png" [alt]="selectedCountry.name.common" height="200" />
+        </div>
+        <div class="digital-clock d-flex justify-content-center m-5" *ngIf="currentTime">
+            <strong>Current Time:</strong> {{ currentTime }}
+        </div>
+
+        <div class="mx-5">
+            <p><strong>Official Name:</strong> {{ selectedCountry.name.official }}</p>
+            <p><strong>Capital:</strong> {{ selectedCountry.capital }}</p>
+            <p><strong>Region:</strong> {{ selectedCountry.region }}</p>
+            <p><strong>Population:</strong> {{ selectedCountry.population }}</p>
+            <p><strong>Currency:</strong> {{ selectedCountry.currencies | json }}</p>
+        </div>
+
+    </div>
+</div>
